@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".chapter3.lesson7.Lesson3_7Activity"/>
+        <activity android:name=".chapter4.lesson1.Lesson4_1Activity"/>
     </application>
 
 </manifest>

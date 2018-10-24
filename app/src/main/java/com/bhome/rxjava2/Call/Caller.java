@@ -22,6 +22,10 @@ public class Caller<T> {
         return receiver;
     }
 
+    public <R> Caller<R> map(Func1<? super T,? extends R> func1){
+        return new Caller<>(new onCallMap<T,R>(this,func1));
+    }
+
     //打电话的动作
     public  interface OnCall<T> extends Action<Receiver<T>> {
 
