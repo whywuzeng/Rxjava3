@@ -3,11 +3,20 @@ package com.bhome.rxjava2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.bhome.rxjava2.chapter3.lesson7.Lesson3_7Activity;
 import com.bhome.rxjava2.chapter4.lesson1.Lesson4_1Activity;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,42 +42,43 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Lesson4_1Activity.class));
             }
         });
-//        findViewById(R.id.text2).setOnClickListener(new View.OnClickListener() {
-//                                                        @Override
-//                                                        public void onClick(View v) {
-//                                                            Observable.create(new ObservableOnSubscribe<String>() {
-//                                                                @Override
-//                                                                public void subscribe(ObservableEmitter<String> e) throws Exception {
-//                                                                    if (!e.isDisposed()) {
-//                                                                        e.onNext("test");
-//                                                                        e.onComplete();
-//                                                                    }
-//                                                                }
-//                                                            }).subscribeOn(Schedulers.newThread())
-//                                                                    .observeOn(Schedulers.newThread())
-//                                                                    .subscribe(new Observer<String>() {
-//                                                                @Override
-//                                                                public void onSubscribe(Disposable d) {
-//                                                                    Log.e(TAG, "onSubscribe: ");
-//                                                                }
-//
-//                                                                @Override
-//                                                                public void onNext(String value) {
-//                                                                    Log.e(TAG, "onNext: " + value);
-//                                                                }
-//
-//                                                                @Override
-//                                                                public void onError(Throwable e) {
-//                                                                    Log.e(TAG, "onError: ");
-//                                                                }
-//
-//                                                                @Override
-//                                                                public void onComplete() {
-//                                                                    Log.e(TAG, "onComplete: ");
-//                                                                }
-//                                                            });
-//                                                        }
-//                                                    });
+        findViewById(R.id.text2).setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            Observable.create(new ObservableOnSubscribe<String>() {
+                                                                @Override
+                                                                public void subscribe(ObservableEmitter<String> e) throws Exception {
+                                                                    if (!e.isDisposed()) {
+                                                                        e.onNext("test");
+                                                                        e.onComplete();
+                                                                    }
+                                                                }
+                                                            }).observeOn(AndroidSchedulers.mainThread())
+                                                                    .subscribeOn(Schedulers.newThread())
+                                                                    .subscribe(new Observer<String>() {
+                                                                @Override
+                                                                public void onSubscribe(Disposable d) {
+                                                                    Log.e(TAG, "onSubscribe: ");
+                                                                }
+
+                                                                @Override
+                                                                public void onNext(String value) {
+                                                                    Log.e(TAG, "onNext: " + value);
+                                                                    btn_Lesson4_1Activity.setText("Lesson4_1Activity改变的"+value);
+                                                                }
+
+                                                                @Override
+                                                                public void onError(Throwable e) {
+                                                                    Log.e(TAG, "onError: ");
+                                                                }
+
+                                                                @Override
+                                                                public void onComplete() {
+                                                                    Log.e(TAG, "onComplete: ");
+                                                                }
+                                                            });
+                                                        }
+                                                    });
 
 //        findViewById(R.id.text2).setOnClickListener(new View.OnClickListener() {
 //            @Override
