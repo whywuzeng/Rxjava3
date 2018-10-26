@@ -10,6 +10,8 @@ import android.widget.Button;
 import com.bhome.rxjava2.chapter3.lesson7.Lesson3_7Activity;
 import com.bhome.rxjava2.chapter4.lesson1.Lesson4_1Activity;
 
+import java.io.File;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -23,10 +25,35 @@ public class MainActivity extends AppCompatActivity {
   private final static String TAG="MainActivity";
   Button button;
   Button btn_Lesson4_1Activity;
+  Button produceBtn;
+  Button soloBtn;
+    private String mPath="/storage/emulated/0/andfix/";
+    private final  static String FILEEND=".apatch";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        produceBtn=findViewById(R.id.produce_bug);
+        soloBtn = findViewById(R.id.solo_bug);
+        testAndFix();
+ //  /storage/emulated/0/Android/data/com.bhome.rxjava2/cache/apatch/
+        //  /storage/emulated/0/andfix/
+//          /storage/emulated/0/andfix/wu.apatch
+        mPath = getExternalCacheDir().getAbsolutePath() + "/apatch/";
+        final File file = new File(mPath);
+        if (file==null||!file.exists())
+        {
+            file.mkdir();
+        }
+
+        ClassLoader classLoader = MainActivity.class.getClassLoader();
+        while (classLoader!=null)
+        {
+            Log.e(TAG, "onCreate: "+classLoader.toString() );
+            classLoader= classLoader.getParent();
+        }
+
         button= findViewById(R.id.btn_toggle);
         btn_Lesson4_1Activity=findViewById(R.id.btn_Lesson4_1Activity);
         button.setOnClickListener(new View.OnClickListener() {
@@ -215,7 +242,37 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+    }
 
+    private String getFileName(){
+        return mPath.concat("wu").concat(FILEEND);
+    }
 
+    private void fixBug(){
+        AndFixPatchManager.getInstance().addPatch(getFileName());
+    }
+
+    private void ProduceBug() {
+        int i= 0;
+        int a=20;
+        Log.e(TAG, "ProduceBug: 修复bug" );
+        int b=a/i;
+    }
+
+    private void testAndFix() {
+        produceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProduceBug();
+            }
+
+        });
+
+        soloBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fixBug();
+            }
+        });
     }
 }

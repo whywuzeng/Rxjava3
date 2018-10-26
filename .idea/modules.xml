@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndFix/AndFix.iml" filepath="$PROJECT_DIR$/AndFix/AndFix.iml" />
       <module fileurl="file://F:\githubProject\Rxjava3\Rxjava2.iml" filepath="F:\githubProject\Rxjava3\Rxjava2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Rxjava3.iml" filepath="$PROJECT_DIR$/Rxjava3.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javasync/javasync.iml" filepath="$PROJECT_DIR$/javasync/javasync.iml" />
     </modules>
   </component>
 </project>
