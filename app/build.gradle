@@ -9,12 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
     signingConfigs {
@@ -32,6 +27,18 @@ android {
             keyPassword "wuzeng"
         }
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
+        }
+    }
+
 }
 
 dependencies {
@@ -43,4 +50,128 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.0.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.0'
     compile project(path: ':AndFix')
+    //optional, help to generate the final application
+    compileOnly "com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}"
+    //tinker's main Android lib
+    implementation "com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}"
+    implementation 'com.android.support:multidex:1.0.3'
+}
+
+def bakPath= file("${buildDir}/bakApk")
+
+ext{
+    tinkerEnable = true
+    tinkerOldApkPath= "${bakPath}/app-release-1030-17-24-24.apk"
+    tinkerApplyMappingPath="${bakPath}/"
+    tinkerApplyResourcePath="${bakPath}/app-release-1030-17-18-12-R.txt"
+    tinkerID="1.0"
+}
+
+def buildWithTinker(){
+    return ext.tinkerEnable
+}
+
+def getOldApkPath(){
+    return ext.tinkerOldApkPath
+}
+
+def getApplyMappingPath(){
+    return ext.tinkerApplyMappingPath
+}
+
+def getApplyResourceMappingPath(){
+    return ext.tinkerApplyResourcePath
+}
+
+def getTinkerIdValue(){
+    return ext.tinkerID
+}
+
+if (buildWithTinker()){
+    apply plugin: 'com.tencent.tinker.patch'
+
+    //所有的tinker配置
+    tinkerPatch{
+        oldApk = getOldApkPath()
+        ignoreWarning =false
+        useSign =true
+        tinkerEnable = buildWithTinker()
+
+        buildConfig{
+            applyMapping = getApplyMappingPath()
+            applyResourceMapping = getApplyResourceMappingPath()
+            tinkerId = getTinkerIdValue()
+            keepDexApply=false
+        }
+
+        dex{
+            dexMode ="jar"
+            pattern =["classes*.dex","assets/secondary-dex-?.jar"]
+            loader =["com.bhome.rxjava2.MyTinkerApplication"]
+        }
+
+        lib{
+            pattern = ["libs/*/*.so"]
+        }
+
+        res{
+            pattern = ["res/*","assets/*","resources.arcs","AndroidManifest.xml"]
+            ignoreChange =["assets/sample_meta.txt"]
+            largeModSize =100
+        }
+
+        packageConfig{
+            configField("patchMessage","fix the 1.0 version's bugs")
+        }
+    }
+}
+
+//=====官方文档的语句=======判断是否具多渠道===========
+        List<String> flavors = new ArrayList<>();
+project.android.productFlavors.each { flavor ->
+    flavors.add(flavor.name)
+}
+boolean hasFlavors = flavors.size() > 0
+//================================================
+/**
+ * 复制基准包和其它必须文件到指定目录
+ */
+android.applicationVariants.all { variant ->
+    /**
+     * task type, you want to bak
+     */
+    def taskName = variant.name
+    def date = new Date().format("MMdd-HH-mm-ss")
+
+    tasks.all {
+        if ("assemble${taskName.capitalize()}".equalsIgnoreCase(it.name)) {
+
+            it.doLast {
+                copy {
+                    def fileNamePrefix = "${project.name}-${variant.baseName}"
+                    def newFileNamePrefix = hasFlavors ? "${fileNamePrefix}" : "${fileNamePrefix}-${date}"
+                   //目的路径的定义
+                    def destPath = hasFlavors ? file("${bakPath}/${project.name}-${date}/${variant.flavorName}") : bakPath
+                    from variant.outputs.first().outputFile
+                    into destPath
+                    //复制拷贝文件
+                    rename { String fileName ->
+                        fileName.replace("${fileNamePrefix}.apk", "${newFileNamePrefix}.apk")
+                    }
+                    //复制拷贝文件
+                    from "${buildDir}/outputs/mapping/${variant.dirName}/mapping.txt"
+                    into destPath
+                    rename { String fileName ->
+                        fileName.replace("mapping.txt", "${newFileNamePrefix}-mapping.txt")
+                    }
+                    //复制拷贝文件
+                    from "${buildDir}/intermediates/symbols/${variant.dirName}/R.txt"
+                    into destPath
+                    rename { String fileName ->
+                        fileName.replace("R.txt", "${newFileNamePrefix}-R.txt")
+                    }
+                }
+            }
+        }
+    }
 }
