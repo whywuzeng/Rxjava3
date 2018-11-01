@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Button soloBtn;
     private String mPath = "/storage/emulated/0/andfix/";
     private final static String FILEEND = ".apk";
-
+    private Button btnTinker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         produceBtn = findViewById(R.id.produce_bug);
         soloBtn = findViewById(R.id.solo_bug);
+        btnTinker=findViewById(R.id.btn_tinker);
         testAndFix();
         //  /storage/emulated/0/Android/data/com.bhome.rxjava2/cache/apatch/
         //  /storage/emulated/0/andfix/
@@ -60,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Lesson3_7Activity.class));
+            }
+        });
+
+        btnTinker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,TinkerActivity.class));
             }
         });
 

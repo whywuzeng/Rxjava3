@@ -19,14 +19,14 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/btn_toggle"
-        android:text="Lesson3_7Activity"
+        android:id="@+id/btn_startservice"
+        android:text="开启service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_Lesson4_1Activity"
-        android:text="Lesson4_1Activity"
+        android:id="@+id/btn_stopservice"
+        android:text="关闭service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -48,8 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
-        android:id="@+id/btn_tinker"
-        android:text="跳转到TinkerService界面"
+        android:text="看的见我么"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
