@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.bhome.rxjava2.chapter3.lesson7.Lesson3_7Activity;
 import com.bhome.rxjava2.chapter4.lesson1.Lesson4_1Activity;
+import com.bhome.rxjava2.handleThread.HandleThreadActivity;
 import com.bhome.rxjava2.tinker.TinkerManager;
 
 import java.io.File;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private String mPath = "/storage/emulated/0/andfix/";
     private final static String FILEEND = ".apk";
     private Button btnTinker;
+    private Button btnhandleThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
         produceBtn = findViewById(R.id.produce_bug);
         soloBtn = findViewById(R.id.solo_bug);
         btnTinker=findViewById(R.id.btn_tinker);
+        btnhandleThread=(Button)findViewById(R.id.btn_handle111);
+        btnhandleThread.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, HandleThreadActivity.class));
+            }
+        });
         testAndFix();
         //  /storage/emulated/0/Android/data/com.bhome.rxjava2/cache/apatch/
         //  /storage/emulated/0/andfix/

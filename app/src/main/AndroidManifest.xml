@@ -11,15 +11,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".chapter3.lesson7.Lesson3_7Activity"/>
+        <activity android:name=".chapter4.lesson1.Lesson4_1Activity"/>
+
+        <activity android:name=".TinkerActivity"/>
+
+        <!--添加scheme命名规则-->
+        <activity android:name=".scheme.AppNativeActivity"
+                  android:label="@string/nativeactivity">
+            <intent-filter>
+                <!--协议部分随便设置-->
+                <data android:scheme="@string/mobileScheme"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".handleThread.HandleThreadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".chapter3.lesson7.Lesson3_7Activity"/>
-        <activity android:name=".chapter4.lesson1.Lesson4_1Activity"/>
-        <activity android:name=".TinkerActivity"/>
 
         <service android:name=".tinker.TinkerService"/>
 
