@@ -1,0 +1,113 @@
+
+Error:(91, 0) Project with path ':lib_recycler' could not be found in project ':app'.
+<a href="openFile:E:\mywork\Bhouse\app\build.gradle">Open File</a>
+
+
+Error:Execution failed for task ':app:transformClassesWithJarMergingForDebug'.
+> com.android.build.api.transform.TransformException: java.util.zip.ZipException: duplicate entry: org/apache/commons/io/CopyUtils.class
+
+
+8020
+
+
+财务日常管理/固定资产管理/资产调拨流程/资产调拨申请流程                                OPTIPLEX 7010
+
+　设备描述: [H:]USB 大容量存储设备(General UDisk)
+　设备类型: 大容量存储设备
+
+　协议版本: USB 2.00
+　当前速度: 高速(HighSpeed)
+　电力消耗: 100mA
+
+ USB设备ID: VID = 048D PID = 1234
+设备序列号: _
+
+设备供应商: General
+　设备名称: UDisk
+设备修订版: 0100
+
+产品制造商: General
+　产品型号: UDisk
+产品修订版: 5.00
+
+　主控厂商: SiliconGo(硅格) [原Kingstor(金存)]
+　主控型号: p
+闪存识别码: 70000500 - 4CE/单通道 [MLC]
+
+　在线资料: http://dl.mydigit.net/search/?type=all&q=p
+
+
+可能的闪存型号
+------------------
+Unknown(未知)
+
+
+闪存识别码映射表
+------------------
+[通道 0]	[通道 1]
+700005000000	--------
+700005000000	--------
+700005000000	--------
+700005000000	--------
+
+
+
+        .father {
+            border:1px solid #000;
+            background:#CCC;
+        }
+        .father div {
+            background:#CCC;
+            border:1px solid #666;
+            margin:5px;
+            padding:5px;
+        }
+
+
+
+Error:Cannot choose between the following configurations of project :lib_recycler:
+  - debugApiElements
+  - debugRuntimeElements
+  - releaseApiElements
+  - releaseRuntimeElements
+All of them match the consumer attributes:
+  - Configuration 'debugApiElements':
+      - Found com.android.build.api.attributes.BuildTypeAttr 'debug' but wasn't required.
+      - Found com.android.build.gradle.internal.dependency.AndroidTypeAttr 'Aar' but wasn't required.
+      - Found com.android.build.gradle.internal.dependency.VariantAttr 'debug' but wasn't required.
+      - Found org.gradle.api.attributes.Usage 'java-api' but wasn't required.
+  - Configuration 'debugRuntimeElements':
+      - Found com.android.build.api.attributes.BuildTypeAttr 'debug' but wasn't required.
+      - Found com.android.build.gradle.internal.dependency.AndroidTypeAttr 'Aar' but wasn't required.
+      - Found com.android.build.gradle.internal.dependency.VariantAttr 'debug' but wasn't required.
+      - Found org.gradle.api.attributes.Usage 'java-runtime' but wasn't required.
+  - Configuration 'releaseApiElements':
+      - Found com.android.build.api.attributes.BuildTypeAttr 'release' but wasn't required.
+      - Found com.android.build.gradle.internal.dependency.AndroidTypeAttr 'Aar' but wasn't required.
+      - Found com.android.build.gradle.internal.dependency.VariantAttr 'release' but wasn't required.
+      - Found org.gradle.api.attributes.Usage 'java-api' but wasn't required.
+  - Configuration 'releaseRuntimeElements':
+      - Found com.android.build.api.attributes.BuildTypeAttr 'release' but wasn't required.
+      - Found com.android.build.gradle.internal.dependency.AndroidTypeAttr 'Aar' but wasn't required.
+      - Found com.android.build.gradle.internal.dependency.VariantAttr 'release' but wasn't required.
+      - Found org.gradle.api.attributes.Usage 'java-runtime' but wasn't required.
+
+
+
+Error:Execution failed for task ':ZXingapp:javaPreCompileDebug'.
+> Annotation processors must be explicitly declared now.  The following dependencies on the compile classpath are found to contain annotation processor.  Please add them to the annotationProcessor configuration.
+    - butterknife-7.0.1.jar (com.jakewharton:butterknife:7.0.1)
+  Alternatively, set android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true to continue with previous behavior.  Note that this option is deprecated and will be removed in the future.
+  See https://developer.android.com/r/tools/annotation-processor-error-message.html for more details.
+
+Error:Execution failed for task ':app:javaPreCompileDebug'.
+> Annotation processors must be explicitly declared now.  The following dependencies on the compile classpath are found to contain annotation processor.  Please add them to the annotationProcessor configuration.
+    - butterknife-7.0.1.jar (com.jakewharton:butterknife:7.0.1)
+  Alternatively, set android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true to continue with previous behavior.  Note that this option is deprecated and will be removed in the future.
+  See https://developer.android.com/r/tools/annotation-processor-error-message.html for more details.
+
+
+Error:Failed to resolve: common
+<a href="openFile:F:/mysoft/MyApplication/app/build.gradle">Open File</a>
+
+
